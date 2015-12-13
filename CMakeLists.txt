@@ -3,7 +3,7 @@ project(libuv C)
 
 option(LIBUV_BUILD_TESTS "builds libuv tests and benchmarks if set to ON" OFF)
 
-set(LIBUVDIR libuv-1.6.1)
+set(LIBUVDIR ${CMAKE_CURRENT_LIST_DIR}/libuv-1.7.5)
 
 include_directories(${LIBUVDIR}/include ${LIBUVDIR}/src)
 set(SOURCES
@@ -59,7 +59,7 @@ if(WIN32)
         ${LIBUVDIR}/src/win/winapi.c
         ${LIBUVDIR}/src/win/winapi.h
         ${LIBUVDIR}/src/win/winsock.c
-        ${LIBUVDIR}/src/win/winsock.h    
+        ${LIBUVDIR}/src/win/winsock.h
         )
 
     add_library(uv ${SOURCES})
@@ -131,7 +131,7 @@ else()
             ${LIBUVDIR}/src/unix/sunos.c
             )
     endif()
-    
+
     if (${CMAKE_SYSTEM_NAME} MATCHES "AIX")
         add_definitions(-D_ALL_SOURCE -D_XOPEN_SOURCE=500 -D_LINUX_SOURCE_COMPAT)
         set (SOURCES ${SOURCES}
@@ -139,7 +139,7 @@ else()
             )
         find_library(PERFSTAT_LIB NAMES perfstat)
     endif()
-    
+
     if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD" OR ${CMAKE_SYSTEM_NAME} MATCHES "DragonFlyBSD")
         set (SOURCES ${SOURCES}
             ${LIBUVDIR}/src/unix/freebsd.c
@@ -151,7 +151,7 @@ else()
             ${LIBUVDIR}/src/unix/openbsd.c
             )
     endif()
-    
+
     if (${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
         set (SOURCES ${SOURCES}
             ${LIBUVDIR}/src/unix/netbsd.c
@@ -169,7 +169,7 @@ else()
         find_library(RT_LIB NAMES rt)
         target_link_libraries(uv ${DL_LIB} ${RT_LIB})
     endif()
-    
+
     if (${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
         find_library(KSTAT_LIB NAMES kstat)
         find_library(NSL_LIB NAMES nsl)
